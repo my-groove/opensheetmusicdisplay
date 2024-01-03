@@ -114,12 +114,20 @@ export class StaveTie extends Element {
         id = this.first_note.getAttribute('id') + "-tie";
       }
 
+      let first_note = this.notes.first_note;
+      let keys;
+      if (!first_note) {
+        first_note = this.first_note;
+        if (first_note) {
+          keys = first_note.keys;
+        }
+      }
       this.setAttribute('el', ctx.openGroup('stavetie', id, {
         xStart: (params.first_x_px + first_x_shift).toString(),
         xEnd: (params.last_x_px + last_x_shift).toString(),
         yStart: Math.min(first_y_px, last_y_px).toString(),
         yEnd: Math.max(first_y_px, last_y_px).toString(),
-        x: this.notes.first_note.keys,
+        x: keys, // not sure why this is added, by Severin in my-groove/osmd commit 3db9d6fbc2f1fa9ed666bf6df24fc4bf2ea52649
         tieDir: params.direction.toString()
       }));
       ctx.beginPath();
