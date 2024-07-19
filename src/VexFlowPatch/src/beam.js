@@ -898,6 +898,19 @@ export class Beam extends Element {
 
     // this.drawStems();
     this.applyStyle();
+
+    this.setAttribute(
+      'el',
+      this.context.openGroup(
+        'mg-beam',
+        this.getAttribute('id'),
+        {
+          startTicks: this.startTicks,
+          endTicks: this.endTicks,
+        }
+      )
+    );
+
     this.drawBeamLines();
     this.restoreStyle();
   }
