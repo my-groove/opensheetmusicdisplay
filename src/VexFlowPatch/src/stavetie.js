@@ -120,7 +120,10 @@ export class StaveTie extends Element {
         yStart: Math.min(first_y_px, last_y_px).toString(),
         yEnd: Math.max(first_y_px, last_y_px).toString(),
         x: this.notes.first_note.keys,
-        tieDir: params.direction.toString()
+        tieDir: params.direction.toString(),
+        ticks: this.last_note.endTicks - this.first_note.startTicks,
+        startTicks: this.first_note.startTicks,
+        endTicks: this.last_note.endTicks, 
       }));
       ctx.beginPath();
       ctx.moveTo(params.first_x_px + first_x_shift, first_y_px);
@@ -193,18 +196,18 @@ export class StaveTie extends Element {
 
     this.renderText(first_x_px, last_x_px);
 
-    this.setAttribute(
-      'el',
-      this.context.openGroup(
-        'mg-stavetie',
-        this.getAttribute('id'),
-        {
-          ticks: last_note.endTicks - first_note.startTicks,
-          startTicks: first_note.startTicks,
-          endTicks: last_note.endTicks, 
-        }
-      )
-    )
+    // this.setAttribute(
+    //   'el',
+    //   this.context.openGroup(
+    //     'mg-stavetie',
+    //     this.getAttribute('id'),
+    //     {
+    //       ticks: last_note.endTicks - first_note.startTicks,
+    //       startTicks: first_note.startTicks,
+    //       endTicks: last_note.endTicks, 
+    //     }
+    //   )
+    // )
 
     return true;
   }
