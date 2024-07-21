@@ -899,6 +899,8 @@ export class Beam extends Element {
     // this.drawStems();
     this.applyStyle();
 
+    console.log(this.getNotes())
+
     this.setAttribute(
       'el',
       this.context.openGroup(
