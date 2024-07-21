@@ -899,20 +899,17 @@ export class Beam extends Element {
     // this.drawStems();
     this.applyStyle();
 
-    const startNote = this.getNotes()[0]
-    const endNote = [...this.getNotes()].reverse()[0]
+    const startNote = notes[0]
+    const endNote = [...notes].reverse()[0]
 
-    this.setAttribute(
-      'el',
-      this.context.openGroup(
-        'mg-beam',
-        this.getAttribute('id'),
-        {
-          startTicks: startNote.startTicks,
-          endTicks: endNote.endTicks,
-        }
-      )
-    );
+    this.context.openGroup(
+      'beam',
+      this.getAttribute('id'),
+      {
+        startTicks: startNote.startTicks,
+        endTicks: endNote.endTicks,
+      }
+    )
 
     this.drawBeamLines();
     this.restoreStyle();
