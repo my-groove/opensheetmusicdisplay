@@ -846,8 +846,14 @@ export class Beam extends Element {
         const lastBeamX = beam_line.end;
         const lastBeamY = this.getSlopeY(lastBeamX, firstStemX, beamY, this.slope);
 
+        const startNote = this.notes[0]
+        const endNote = [...this.notes].reverse()[0]
+
         const noteSVGId = startNoteId;
-        this.context.openGroup('beam', `${noteSVGId}-beam${beamNumber}`);
+        this.context.openGroup('beam', `${noteSVGId}-beam${beamNumber}`, {
+          startTicks: startNote.startTicks.toString(),
+          endTicks: endNote.endTicks.toString(),
+        });
         this.context.beginPath();
         this.context.moveTo(startBeamX, startBeamY);
         this.context.lineTo(startBeamX, startBeamY + beamThickness);
@@ -891,14 +897,6 @@ export class Beam extends Element {
 
     const notes = this.getNotes();
     if (notes && notes.some(n => n.getAttribute("type") === "TabNote")) return;
-
-    // const startNote = notes[0]
-    // const endNote = [...notes].reverse()[0]
-
-    this.context.openGroup('beam', `${noteSVGId}-beam${beamNumber}`, {
-      // startTicks: startNote.startTicks.toString(),
-      // endTicks: endNote.endTicks.toString(),
-    });
 
     if (!this.postFormatted) {
       this.postFormat();
