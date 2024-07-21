@@ -892,29 +892,12 @@ export class Beam extends Element {
     const notes = this.getNotes();
     if (notes && notes.some(n => n.getAttribute("type") === "TabNote")) return;
 
-    // this.setAttribute(
-    //   'el',
-    //   this.context.openGroup(
-    //     'mg-beam',
-    //     this.getAttribute('id'),
-    //     {
-    //       ticks: ,
-    //       startTicks: startNote.startTicks,
-    //       endTicks: endNote.endTicks,
-    //     }
-    //   )
-    // )
-    // this.setAttribute('ticks', (endNote.endTicks - startNote.startTicks).toString())
-    // this.setAttribute('startTicks', (startNote.startTicks).toString())
-    // this.setAttribute('endTicks', (endNote.endTicks).toString())
-
     const startNote = notes[0]
     const endNote = [...notes].reverse()[0]
-    
+
     this.context.openGroup('beam', `${noteSVGId}-beam${beamNumber}`, {
-      ticks: endNote.endTicks - startNote.startTicks,
-      startTicks: startNote.startTicks,
-      endTicks: endNote.endTicks,
+      startTicks: startNote.startTicks.toString(),
+      endTicks: endNote.endTicks.toString(),
     });
 
     if (!this.postFormatted) {

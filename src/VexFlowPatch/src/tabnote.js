@@ -497,9 +497,8 @@ export class TabNote extends StemmableNote {
       this.getAttribute('id'), 
       { 
         xPos: this.getAbsoluteX().toString(),
-        ticks: this.getTicks().value(),
-        startTicks: this.startTicks,
-        endTicks: this.endTicks,  
+        startTicks: this.startTicks.toString(),
+        endTicks: this.endTicks.toString(),  
       }
     );
     this.drawPositions();
