@@ -899,7 +899,8 @@ export class Beam extends Element {
     // this.drawStems();
     this.applyStyle();
 
-    console.log(this.getNotes())
+    const startNote = this.getNotes()[0]
+    const endNote = [...this.getNotes()].reverse()[0]
 
     this.setAttribute(
       'el',
@@ -907,8 +908,8 @@ export class Beam extends Element {
         'mg-beam',
         this.getAttribute('id'),
         {
-          startTicks: this.startTicks,
-          endTicks: this.endTicks,
+          startTicks: startNote.startTicks,
+          endTicks: endNote.endTicks,
         }
       )
     );
