@@ -192,6 +192,20 @@ export class StaveTie extends Element {
     });
 
     this.renderText(first_x_px, last_x_px);
+
+    this.setAttribute(
+      'el',
+      this.context.openGroup(
+        'mg-stavetie',
+        this.getAttribute('id'),
+        {
+          ticks: last_note.endTicks - first_note.startTicks,
+          startTicks: first_note.startTicks,
+          endTicks: last_note.endTicks, 
+        }
+      )
+    )
+
     return true;
   }
 }

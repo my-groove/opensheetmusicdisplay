@@ -509,5 +509,18 @@ export class TabNote extends StemmableNote {
     this.drawFlag();
     this.drawModifiers();
     this.context.closeGroup();
+
+    this.setAttribute(
+      'el',
+      this.context.openGroup(
+        'mg-tabnote',
+        this.getAttribute('id'),
+        {
+          ticks: this.getTicks().value(),
+          startTicks: this.startTicks,
+          endTicks: this.endTicks, 
+        }
+      )
+    )
   }
 }
