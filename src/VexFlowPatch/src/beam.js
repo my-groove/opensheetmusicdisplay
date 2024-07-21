@@ -892,12 +892,12 @@ export class Beam extends Element {
     const notes = this.getNotes();
     if (notes && notes.some(n => n.getAttribute("type") === "TabNote")) return;
 
-    const startNote = notes[0]
-    const endNote = [...notes].reverse()[0]
+    // const startNote = notes[0]
+    // const endNote = [...notes].reverse()[0]
 
     this.context.openGroup('beam', `${noteSVGId}-beam${beamNumber}`, {
-      startTicks: startNote.startTicks.toString(),
-      endTicks: endNote.endTicks.toString(),
+      // startTicks: startNote.startTicks.toString(),
+      // endTicks: endNote.endTicks.toString(),
     });
 
     if (!this.postFormatted) {
