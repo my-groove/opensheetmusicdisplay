@@ -65,6 +65,7 @@ export class EngravingRules {
     public BetweenStaffDistance: number;
     public StaffHeight: number;
     public TabStaffInterlineHeight: number;
+    public TabStaffInterlineHeightForBboxes: number;
     public BetweenStaffLinesDistance: number;
     /** Whether to automatically beam notes that don't already have beams in XML. */
     public AutoBeamNotes: boolean;
@@ -412,7 +413,14 @@ export class EngravingRules {
     public DefaultFontStyle: FontStyles;
     public DefaultVexFlowNoteFont: string;
     public MaxMeasureToDrawIndex: number;
+    /** The setting given in osmd.setOptions(), which may lead to a different index if there's a pickup measure. */
+    public MaxMeasureToDrawNumber: number;
     public MinMeasureToDrawIndex: number;
+    /** The setting given in osmd.setOptions(), which may lead to a different index if there's a pickup measure.
+     * If there's a pickup measure (measure 0), and we want to draw from measure number 2,
+     *   we need to skip measure index 0 (the pickup measure).
+     */
+    public MinMeasureToDrawNumber: number;
     public MaxPageToDrawNumber: number;
     public MaxSystemToDrawNumber: number;
 
@@ -549,6 +557,8 @@ export class EngravingRules {
         // System Sizing and Label Variables
         this.StaffHeight = 4.0;
         this.TabStaffInterlineHeight = 1.1111;
+        this.TabStaffInterlineHeightForBboxes = 1.3; // bbox exactly on top tab line + 1.3 = 2nd line
+        //   if we also set TabStaffInterlineHeight to 1.3, tab scores get bigger. (because this affects StaffHeight)
         this.BetweenStaffLinesDistance = EngravingRules.unit;
         this.SystemLeftMargin = 0.0;
         this.SystemRightMargin = 0.0;
@@ -856,7 +866,9 @@ export class EngravingRules {
         this.DefaultFontStyle = FontStyles.Regular;
         this.DefaultVexFlowNoteFont = "gonville"; // was the default vexflow font up to vexflow 1.2.93, now it's Bravura, which is more cursive/bold
         this.MaxMeasureToDrawIndex = Number.MAX_VALUE;
+        this.MaxMeasureToDrawNumber = Number.MAX_VALUE;
         this.MinMeasureToDrawIndex = 0;
+        this.MinMeasureToDrawNumber = 0;
         this.MaxSystemToDrawNumber = Number.MAX_VALUE;
         this.MaxPageToDrawNumber = Number.MAX_VALUE;
         this.RenderComposer = true;
